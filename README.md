@@ -8,6 +8,7 @@ This is a basic CRUD backend made using Postgresql as database with help of Pris
 ## Installation
 ```bash
 $ git clone https://github.com/captaincoro11/catoff_task.git
+$ cd catoff_task
 $ npm install
 ```
 ## Create a .env file
@@ -18,7 +19,6 @@ DATABASE_URL=""  //Your Postgresql database url here
 ## Prisma Setup
 After creating a .env file 
 ```bash
-$ npm install prisma --save-dev
 $ npx prisma migrate dev
        or
 $ prisma migrate dev
