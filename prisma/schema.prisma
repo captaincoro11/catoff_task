@@ -24,6 +24,7 @@ model User {
 model Wallet {
   id        Int      @id @default(autoincrement())
   address String @unique @default(uuid())
+  amount Float @default(0.0)
   userId String
   user User @relation(fields: [userId],references: [id])
 }

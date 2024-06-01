@@ -22,6 +22,11 @@ export class UserController {
         return this.userService.UpdatePassword(dto);
     }
 
+    @Get('me')
+    async GetMe(@Body() dto:AuthDto){
+        return this.userService.GetMe(dto)
+    }
+
     
 
 

@@ -8,13 +8,41 @@ import * as bcrypt from 'bcrypt'
 export class UserService {
     constructor(private prisma:PrismaService){}
 
+
+    async GetMe(dto:AuthDto){
+        try {
+            const user = await this.prisma.user.findFirst({
+                where:{
+                    email:dto.email
+
+                }
+            });
+
+            const wallets = await this.prisma.wallet.findMany({
+                where:{
+                    userId:user.id
+                }
+            });
+
+            return{
+                message:"Date Fetched Successfully",
+                user,
+                wallets
+            }
+            
+        } catch (error) {
+            
+        }
+    }
+
     async GetAllUsers(){
         try{
         const AllUsers = await this.prisma.user.findMany({});
+
         return{
             message:"All Users Fetched SuccessFully",
             AllUsers
-        }
+        };
 
 
         }
@@ -40,15 +68,15 @@ export class UserService {
                 }
             };
 
-            const wallet = await this.prisma.wallet.findFirst({
+            const wallets = await this.prisma.wallet.findMany({
                 where:{
                     userId:user.id
                 }
             });
 
-            await this.prisma.wallet.delete({
+            await this.prisma.wallet.deleteMany({
                 where:{
-                    address:wallet.address
+                    userId:user.id
                 }
             });
 
